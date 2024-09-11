@@ -185,7 +185,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\common;..\..\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\common;..\..\common;..\..\hl2ss_uwp_1.0.33.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /await</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAsWinRT>false</CompileAsWinRT>
@@ -220,9 +220,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hl2ss.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\hl2ss_uwp_1.0.33.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:ARM64 /PDBALTPATH:$(TargetName).pdb</AdditionalOptions>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
@@ -263,6 +262,15 @@
     <ClInclude Include="..\..\common\ShaderStructures.h" />
     <ClInclude Include="..\common\Content\StatusDisplay.h" />
     <ClCompile Include="..\common\Content\StatusDisplay.cpp" />
+    <None Include="..\..\hl2ss_uwp_1.0.33.0\dll\hl2ss.dll">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</DeploymentContent>
+    </None>
+    <None Include="..\..\hl2ss_uwp_1.0.33.0\dll\Microsoft.MixedReality.EyeTracking.dll">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</DeploymentContent>
+    </None>
+    <None Include="..\..\hl2ss_uwp_1.0.33.0\dll\Microsoft.MixedReality.SceneUnderstanding.dll">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</DeploymentContent>
+    </None>
     <None Include=".\Assets\RemotingLogo.dds">
       <Link>.\%(FileName)%(Extension)</Link>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</DeploymentContent>

@@ -21,6 +21,8 @@
 #include <winrt/Windows.Foundation.Metadata.h>
 #include <winrt/Windows.Ui.Popups.h>
 
+#include <hl2ss/hl2ss.h>
+
 using namespace std::chrono_literals;
 
 using namespace winrt::Microsoft::Holographic::AppRemoting;
@@ -495,6 +497,8 @@ void SamplePlayerMain::SetWindow(const CoreWindow& window)
         UpdateStatusDisplay();
     }
 #endif
+
+    InitializeStreams(0xFFFFFFFF);
 }
 
 void SamplePlayerMain::Load(const winrt::hstring& entryPoint)
