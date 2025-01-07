@@ -190,24 +190,25 @@ HolographicFrame SamplePlayerMain::Update(float deltaTimeInSeconds, const Hologr
     m_deviceResources->EnsureCameraResources(
         holographicFrame, holographicFrame.CurrentPrediction(), focusPointCoordinateSystem, focusPointPosition);
 
-#ifdef ENABLE_USER_COORDINATE_SYSTEM_SAMPLE
     if (m_playerContext.ConnectionState() == ConnectionState::Connected && !m_trackingLost && m_userSpatialFrameOfReference != nullptr)
     {
         SpatialCoordinateSystem userCoordinateSystem = m_userSpatialFrameOfReference.CoordinateSystem();
 
         try
         {
+            OverrideWorldCoordinateSystem(winrt::get_abi(userCoordinateSystem));
             m_playerContext.UpdateUserSpatialFrameOfReference(userCoordinateSystem);
         }
         catch (...)
         {
         }
 
+#ifdef ENABLE_USER_COORDINATE_SYSTEM_SAMPLE
         SpatialCoordinateSystem renderingCoordinateSystem =
             m_attachedFrameOfReference.GetStationaryCoordinateSystemAtTimestamp(holographicFrame.CurrentPrediction().Timestamp());
         m_simpleCubeRenderer->Update(renderingCoordinateSystem, userCoordinateSystem);
-    }
 #endif
+    }
 
     return holographicFrame;
 }
@@ -427,7 +428,7 @@ void SamplePlayerMain::Initialize(const CoreApplicationView& applicationView)
         m_locatabilityChangedRevoker =
             m_spatialLocator.LocatabilityChanged(winrt::auto_revoke, {this, &SamplePlayerMain::OnLocatabilityChanged});
         m_attachedFrameOfReference = m_spatialLocator.CreateAttachedFrameOfReferenceAtCurrentHeading();
-
+        m_userSpatialFrameOfReference = m_spatialLocator.CreateStationaryFrameOfReferenceAtCurrentLocation();
 #ifdef ENABLE_USER_COORDINATE_SYSTEM_SAMPLE
         // Create a stationaryFrameOfReference in front of the user.
         m_userSpatialFrameOfReference =

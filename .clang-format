@@ -21,10 +21,8 @@ BraceWrapping:
 AllowShortIfStatementsOnASingleLine: false
 ColumnLimit: 140
 TabWidth: 4
-AccessModifierOffset: -2
 PointerAlignment: Left
 IndentCaseLabels: true
-AllowShortFunctionsOnASingleLine: Inline
 MaxEmptyLinesToKeep: 3
 IndentPPDirectives: AfterHash
 BreakConstructorInitializers: BeforeComma

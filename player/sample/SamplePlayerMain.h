@@ -135,10 +135,10 @@ private:
     // Renders a colored holographic cube that's 20 centimeters wide. This sample content is used to demonstrate rendering in the user
     // coordinate system.
     std::unique_ptr<SimpleCubeRenderer> m_simpleCubeRenderer;
+#endif
 
     // The userSpatialFrameOfReference.
     winrt::Windows::Perception::Spatial::SpatialStationaryFrameOfReference m_userSpatialFrameOfReference = nullptr;
-#endif
 
     // Texture holding the AppRemoting logo
     winrt::com_ptr<ID3D11Resource> m_logoImage;
